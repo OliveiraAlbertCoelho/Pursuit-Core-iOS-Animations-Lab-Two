@@ -12,6 +12,7 @@
 		506F36442354C0FD0021BAAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 506F36432354C0FD0021BAAB /* Assets.xcassets */; };
 		506F36522354C0FD0021BAAB /* AnimationsLab2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F36512354C0FD0021BAAB /* AnimationsLab2Tests.swift */; };
 		506F365D2354C14F0021BAAB /* AnimationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F365C2354C14F0021BAAB /* AnimationsVC.swift */; };
+		506F36612354FD140021BAAB /* FunctionsUIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506F36602354FD140021BAAB /* FunctionsUIVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		506F36512354C0FD0021BAAB /* AnimationsLab2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsLab2Tests.swift; sourceTree = "<group>"; };
 		506F36532354C0FD0021BAAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		506F365C2354C14F0021BAAB /* AnimationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsVC.swift; sourceTree = "<group>"; };
+		506F36602354FD140021BAAB /* FunctionsUIVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionsUIVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				506F36432354C0FD0021BAAB /* Assets.xcassets */,
 				506F36482354C0FD0021BAAB /* Info.plist */,
 				506F365C2354C14F0021BAAB /* AnimationsVC.swift */,
+				506F36602354FD140021BAAB /* FunctionsUIVIew.swift */,
 			);
 			path = AnimationsLab2;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			files = (
 				506F363B2354C0FD0021BAAB /* AppDelegate.swift in Sources */,
 				506F363D2354C0FD0021BAAB /* SceneDelegate.swift in Sources */,
+				506F36612354FD140021BAAB /* FunctionsUIVIew.swift in Sources */,
 				506F365D2354C14F0021BAAB /* AnimationsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

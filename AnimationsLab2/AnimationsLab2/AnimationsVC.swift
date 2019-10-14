@@ -13,8 +13,11 @@ class AnimationsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        addSubViews()
-        constrainButtons()
+        view.addSubview(buttonStack)
+        constrainButtonStackView()
+        addBallContraints()
+        view.addSubview(actionsButtonStack)
+        constrainActionButtonStackView()
     }
     lazy var linearButton: UIButton  = {
         let linearButton = UIButton()
@@ -24,19 +27,19 @@ class AnimationsVC: UIViewController {
     }()
     lazy var easeInButton: UIButton  = {
         let easeInButton = UIButton()
-        easeInButton.setTitle("easeIn", for: .normal)
+        easeInButton.setTitle("EaseIn", for: .normal)
         easeInButton.setTitleColor(.blue, for: .normal)
         return easeInButton
     }()
     lazy var easeOutButton: UIButton  = {
         let easeOutButton = UIButton()
-        easeOutButton.setTitle("easeOut", for: .normal)
+        easeOutButton.setTitle("EaseOut", for: .normal)
         easeOutButton.setTitleColor(.blue, for: .normal)
         return easeOutButton
     }()
     lazy var easeIneaseOutButton: UIButton  = {
         let easeIneaseOutButton = UIButton()
-        easeIneaseOutButton.setTitle("easeIneaseOut", for: .normal)
+        easeIneaseOutButton.setTitle("EaseIneaseOut", for: .normal)
         easeIneaseOutButton.setTitleColor(.blue, for: .normal)
         return easeIneaseOutButton
     }()
@@ -45,7 +48,7 @@ class AnimationsVC: UIViewController {
         ball.image = UIImage(named: "Ball")!
         return ball
     }()
-    lazy var secondBall: UIView = {
+    lazy var secondBall: UIImageView = {
         var ball = UIImageView()
         ball.image = UIImage(named: "Ball")!
         return ball
@@ -61,76 +64,115 @@ class AnimationsVC: UIViewController {
         
         return ball
     }()
+    lazy var resetButton: UIButton = {
+        var reset = UIButton()
+        reset.setTitle("Reset", for: .normal)
+        reset.setTitleColor(.blue, for: .normal)
+        return reset
+    }()
+    lazy var animateButton: UIButton = {
+           var animateButton = UIButton()
+            animateButton.setTitleColor(.blue, for: .normal)
+           animateButton.setTitle("Animate", for: .normal)
+           return animateButton
+       }()
+    lazy var actionsButtonStack: UIStackView = {
+          let buttonStack = UIStackView(arrangedSubviews: [resetButton,animateButton])
+          buttonStack.axis = .horizontal
+          buttonStack.alignment = .center
+          buttonStack.distribution = .fillProportionally
+          buttonStack.spacing = 5
+          return buttonStack
+      }()
     
     lazy var buttonStack: UIStackView = {
-        let buttonStack = UIStackView()
+        let buttonStack = UIStackView(arrangedSubviews: [linearButton,easeInButton,easeOutButton,easeIneaseOutButton])
         buttonStack.axis = .horizontal
         buttonStack.alignment = .center
         buttonStack.distribution = .fillProportionally
-        buttonStack.spacing = 2
-        
+        buttonStack.spacing = 5
         return buttonStack
     }()
     
-    //    lazy var ballHeightConstaint: NSLayoutConstraint = {
-    //        ball.heightAnchor.constraint(equalToConstant: 200)
-    //       }()
-    //       lazy var ballWidthConstraint: NSLayoutConstraint = {
-    //        ball.widthAnchor.constraint(equalToConstant: 200)
-    //       }()
-    //       lazy var ballCenterXConstraint: NSLayoutConstraint = {
-    //           ball.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-    //       }()
-    //       lazy var ballCenterYConstraint: NSLayoutConstraint = {
-    //           ball.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-    //       }()
-    private func addSubViews(){
-        addViewstoButtonStack()
-        view.addSubview(buttonStack)
+    
+    private func setUpBallOneConstraints(){
+        view.addSubview(ball)
+        ball.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            ballOneCenterYConstraint,
+            ball.centerXAnchor.constraint(equalTo: self.linearButton.centerXAnchor, constant: 0),
+            ball.widthAnchor.constraint(equalToConstant: 50),
+            ball.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
-    private func addViewstoButtonStack (){
-        buttonStack.addSubview(linearButton)
-        buttonStack.addSubview(easeInButton)
-        buttonStack.addSubview(easeOutButton)
-        buttonStack.addSubview(easeIneaseOutButton)
+    lazy var ballOneCenterYConstraint: NSLayoutConstraint = {
+        self.ball.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+    }()
+    private func setUpSecondBallOneConstraints(){
+        view.addSubview(secondBall)
+        secondBall.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            secondBallCenterYConstraint,
+            secondBall.centerXAnchor.constraint(equalTo: self.easeInButton.centerXAnchor, constant: 30),
+            secondBall.widthAnchor.constraint(equalToConstant: 50),
+            secondBall.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
-    private func constrainButtons(){
-        constrainLinearButton()
-        constrainEaseIn()
-        constrainEaseOut()
-        constrainLeftButton()
-        constrainButtonStackView()
+    lazy var secondBallCenterYConstraint: NSLayoutConstraint = {
+        self.secondBall.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+    }()
+    private func setUpThirdBallOneConstraints(){
+        view.addSubview(thirdBall)
+        thirdBall.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            thirdBallCenterYConstraint,
+            thirdBall.centerXAnchor.constraint(equalTo: self.easeOutButton.centerXAnchor, constant: 30),
+            thirdBall.widthAnchor.constraint(equalToConstant: 50),
+            thirdBall.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
-    private func constrainLinearButton() {
-        linearButton.translatesAutoresizingMaskIntoConstraints = false
-        linearButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        linearButton.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    lazy var thirdBallCenterYConstraint: NSLayoutConstraint = {
+        self.thirdBall.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+    }()
+    
+    private func setUpFourthBallContraints(){
+        view.addSubview(fourthBall)
+        fourthBall.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            fourthBallCenterYConstraint,
+            fourthBall.centerXAnchor.constraint(equalTo: self.easeIneaseOutButton.centerXAnchor, constant: 0),
+            fourthBall.widthAnchor.constraint(equalToConstant: 50),
+            fourthBall.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    lazy var fourthBallCenterYConstraint: NSLayoutConstraint = {
+        self.fourthBall.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -200)
+    }()
+    
+    private func addBallContraints(){
+        setUpBallOneConstraints()
+        setUpSecondBallOneConstraints()
+        setUpThirdBallOneConstraints()
+        setUpFourthBallContraints()
     }
     
-    private func constrainEaseIn() {
-        easeInButton.translatesAutoresizingMaskIntoConstraints = false
-        easeInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        easeInButton.leadingAnchor.constraint(equalTo: linearButton.trailingAnchor).isActive = true
-    }
-    private func constrainEaseOut() {
-        easeOutButton.translatesAutoresizingMaskIntoConstraints = false
-        easeOutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        easeOutButton.leadingAnchor.constraint(equalTo: easeInButton.trailingAnchor).isActive = true
-    }
-    private func constrainLeftButton() {
-        easeIneaseOutButton.translatesAutoresizingMaskIntoConstraints = false
-        easeIneaseOutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        easeIneaseOutButton.leadingAnchor.constraint(equalTo: easeOutButton.trailingAnchor).isActive = true
-    }
     
     private func constrainButtonStackView() {
         buttonStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            
             buttonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonStack.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            buttonStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             buttonStack.heightAnchor.constraint(equalToConstant: 50),
             buttonStack.widthAnchor.constraint(equalTo: view.widthAnchor),
         ])
     }
+    private func constrainActionButtonStackView() {
+           actionsButtonStack.translatesAutoresizingMaskIntoConstraints = false
+           NSLayoutConstraint.activate([
+               actionsButtonStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+               actionsButtonStack.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50),
+               actionsButtonStack.heightAnchor.constraint(equalToConstant: 50),
+               actionsButtonStack.widthAnchor.constraint(equalTo: view.widthAnchor),
+           ])
+       }
 }
