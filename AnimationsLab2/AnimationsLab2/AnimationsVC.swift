@@ -80,6 +80,7 @@ class AnimationsVC: UIViewController {
         var reset = UIButton()
         reset.setTitle("Reset", for: .normal)
         reset.setTitleColor(.blue, for: .normal)
+        reset.backgroundColor = .green
         reset.addTarget(self, action: #selector(resetaction(sender:)), for: .touchUpInside)
         return reset
     }()
@@ -87,6 +88,7 @@ class AnimationsVC: UIViewController {
         var animateButton = UIButton()
         animateButton.setTitleColor(.blue, for: .normal)
         animateButton.setTitle("Animate", for: .normal)
+        animateButton.backgroundColor = .green
         animateButton.addTarget(self, action: #selector(animateAction(sender:)), for: .touchUpInside)
         return animateButton
     }()
@@ -94,7 +96,7 @@ class AnimationsVC: UIViewController {
         let buttonStack = UIStackView(arrangedSubviews: [resetButton,animateButton])
         buttonStack.axis = .horizontal
         buttonStack.alignment = .center
-        buttonStack.distribution = .fillProportionally
+        buttonStack.distribution = .fillEqually
         buttonStack.spacing = 5
         return buttonStack
     }()
